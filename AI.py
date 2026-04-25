@@ -44,8 +44,12 @@ while mode_choice not in modes:
 # the chosen mode influences the behaviour of the ai
 messages[0] = [{"role": "system", "content": modes[mode_choice]}]
 
+print("Welcome to your AI Assistant")
+print("Type /help to see commands\n")
+
 while True:
-    user_input = input("You:")
+    print("\nYou:", end=" ")
+    user_input = input()
 
     if user_input == "exit":
         break
@@ -62,6 +66,16 @@ while True:
 
         # the chosen mode influences the behaviour of the ai
         messages[0] = [{"role": "system", "content": modes[mode_choice]}]
+        continue
+
+    elif user_input.lower() == "/clear":
+        messages = [messages[0]]
+        print("conversation cleared")
+        continue
+
+    elif user_input.lower() == "/history":
+        for msg in messages:
+            print(msg)
         continue
 
     # enable user to give a command to the ai this function
@@ -90,7 +104,9 @@ while True:
     if len(messages) > MAX_MESSAGES:
         messages = [messages[0]] + messages[-MAX_MESSAGES:]
 
-    print("AI:", reply)
+    print("\n--- AI ---")
+    print(reply)
+    print("----------\n")
 
 # saves the messages list that stores the request in the form of dictionaries sent to the api
 if input("Do you want to save this conversations?(y/n)").lower() == "y":

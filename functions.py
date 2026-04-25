@@ -18,7 +18,16 @@ def handle_command(user_input):
         return prompt
 
     elif command == "/help":
-        print("/summarize, /ideas, /code")
+        print("""
+                Available commands:
+                /summarize <text>
+                /ideas <topic>
+                /code <code>
+                /mode
+                /clear
+                /history
+                exit
+                """)
         return None
 
     else:
